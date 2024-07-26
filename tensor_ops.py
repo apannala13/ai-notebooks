@@ -81,4 +81,63 @@ x = np.array([[1, 2, 3],
 y = np.array([10, 20, 30])
 naive_matrix_vector_dot(x, y)
 
+#-------------------------------------------#
+
+def naive_vector_dot(x, y):
+    """
+    Computes the dot product of two vectors.
+
+    Parameters:
+    x (np.ndarray): A 1-dimensional numpy array.
+    y (np.ndarray): A 1-dimensional numpy array.
+
+    Returns:
+    float: The dot product of the two vectors.
+    
+    Raises:
+    AssertionError: If either x or y is not a 1-dimensional array.
+    """
+    assert len(x.shape) == 1
+    assert len(y.shape) == 1
+
+    z = 0.
+    for i in range(x.shape[0]):
+        z += x[i] * y[i]
+    return z 
+
+def naive_matrix_dot(x, y):
+    """
+    Computes the matrix product of two matrices using a naive approach.
+
+    Parameters:
+    x (np.ndarray): A 2-dimensional numpy array.
+    y (np.ndarray): A 2-dimensional numpy array.
+
+    Returns:
+    np.ndarray: The result of the matrix multiplication.
+    
+    Raises:
+    AssertionError: If either x or y is not a 2-dimensional array, 
+                    or if the number of columns in x does not equal the number of rows in y.
+    """
+    assert len(x.shape) == 2
+    assert len(y.shape) == 2
+    assert x.shape[1] == y.shape[0]
+
+    z = np.zeros((x.shape[0], y.shape[1]))
+    for i in range(x.shape[0]):
+        for j in range(y.shape[1]):
+            row_x = x[i, :]
+            column_y = y[:, j]
+            z[i, j] = naive_vector_dot(row_x, column_y)
+
+    return z 
+
+if __name__ == "__main__":
+    x = np.array([[1, 2, 3], [4, 5, 6]])
+    y = np.array([[10, 12], [13, 14], [15, 16]])
+    final = naive_matrix_dot(x, y)
+    print(final)
+
+
 
