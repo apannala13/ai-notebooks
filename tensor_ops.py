@@ -64,7 +64,7 @@ y = np.array([4, 5, 6])
 # naive_dot_product(x, y)
 
 
-#dot product of vector and tensor. returns vector result.
+#dot product of vector and matrix. returns vector result.
 def naive_matrix_vector_dot(x, y):
     assert len(x.shape) == 2
     assert len(y.shape) == 1
