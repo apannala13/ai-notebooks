@@ -11,7 +11,6 @@ def linear_regression_normal_equation(X: list[list[float]], y: list[float]) -> l
 
 #Batch Gradient Descent 
 import numpy as np
-
 def linear_regression_gradient_descent(X: np.ndarray, y: np.ndarray, alpha: float, iterations: int) -> np.ndarray:
     m, n = X.shape  # m is the number of training examples (rows), n is the number of features (columns)
     coefs = np.zeros((n, 1))  # Initialize coefficients (weights) to a 2D array of zeros with n rows (one for each feature) and 1 column (output)
