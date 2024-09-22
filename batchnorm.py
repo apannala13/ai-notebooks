@@ -37,11 +37,11 @@ def process_feature(digits):
 class NeuralNet(nn.Module):
      def __init__(self):
         super(NeuralNet, self).__init__()
-        self.fc1 = nn.Linear(64, 128)
+        self.fc1 = nn.Linear(64, 128) #input, output
         self.batchnorm1 = nn.BatchNorm1d(128)
         self.fc2 = nn.Linear(128, 64)
         self.batchnorm2 = nn.BatchNorm1d(64)
-        self.fc3 = nn.Linear(64, 10)
+        self.fc3 = nn.Linear(64, 10) #one output with 10 classes for final
     
      def forward(self, x):
         x = self.fc1(x)
@@ -55,7 +55,7 @@ class NeuralNet(nn.Module):
 
 
 model = NeuralNet()
-criterion = nn.CrossEntropyLoss()
+criterion = nn.CrossEntropyLoss() # == sparse cross entropy
 num_epochs = 20 
 optimizer = optim.SGD(model.parameters(), lr=0.1)
 
@@ -63,12 +63,12 @@ X_test_tensor, y_test_tensor, dataloader = process_feature(digits)
 
 for epoch in range(num_epochs):
     for X_batch, y_batch in dataloader:
-        model.train()
+        model.train() #initialize model
         optimizer.zero_grad()
         outputs = model(X_batch)
         loss = criterion(outputs, y_batch)
         loss.backward()
-        clip_grad_norm_(model.parameters(), max_norm=1.0)
+        clip_grad_norm_(model.parameters(), max_norm=1.0) #similar to constrained regression, except on gradients instead of coefficients
         optimizer.step()
 
     print(f'Epoch[{epoch + 1}/{num_epochs}], Loss: {loss.item():.4f}')
