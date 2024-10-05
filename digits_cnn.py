@@ -1,13 +1,3 @@
-#two basic components of a CNN - kernel and Input 
-#input is typically an image or multidimensional array representing data (features), kernel is a small matrix of weights, 
-#that perform convolutions on input data 
-#convolutions are a sliding window operation, combining the input and kernel. 
-#e.g. systematically moving a magnifying glass across a painting, focusing on small areas at a time 
-#creating a sort of "map" of what we've observed - this is the feature map in convulution operation 
-#the output matrix is generated from performing the convolution operation
-#in order for a layer to have the same width and height as the previous layer, we add zero padding 
-
-
 from sklearn.datasets import load_digits
 import torch 
 import torch.nn as nn
