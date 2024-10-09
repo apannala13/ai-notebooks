@@ -6,7 +6,6 @@ from torch.utils.data import DataLoader, TensorDataset
 from tensorflow.keras.datasets import cifar10
 from sklearn.preprocessing import MinMaxScaler
 
-
 (x_train, y_train), (x_test, y_test) = cifar10.load_data()
 x_train, x_test = x_train / 255.0, x_test / 255.0 
 
@@ -31,7 +30,6 @@ class ResidualBlock(nn.Module):
         residual = x 
         if self.downsample is not None:
             residual = self.downsample(residual)
-
         out = F.relu(self.batchnorm1(self.cnl1(x))) 
         out = self.batchnorm2(self.cnl2(x))
         out += residual 
@@ -71,7 +69,7 @@ floss = nn.CrossEntropyLoss()
 
 for epoch in range(num_epochs):
     model.train()
-    for x_batch, y_batch in dataloader_test:
+    for x_batch, y_batch in dataloader_train:
         optim.zero_grad()
         outputs = model(x_batch)
         loss = floss(outputs, y_batch)
@@ -80,6 +78,6 @@ for epoch in range(num_epochs):
 
 model.eval()
 with torch.no_grad():
-    pass 
-
-
+    for x_batch, y_batch in dataloader_test:
+        outputs = model(x_batch)
+        loss = floss(outputs, y_batch)
