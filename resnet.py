@@ -70,14 +70,16 @@ floss = nn.CrossEntropyLoss()
 for epoch in range(num_epochs):
     model.train()
     for x_batch, y_batch in dataloader_train:
-        optim.zero_grad()
+        optimizer.zero_grad()
         outputs = model(x_batch)
         loss = floss(outputs, y_batch)
         loss.backward()
-        optim.step()
+        optimizer.step()
 
 model.eval()
 with torch.no_grad():
     for x_batch, y_batch in dataloader_test:
         outputs = model(x_batch)
         loss = floss(outputs, y_batch)
+        print(loss)
+        
